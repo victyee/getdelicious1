@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+
+Operator - Edit Profile
+
+
+{% load staticfiles %}
+
+
+{% block content %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Add</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                            <li>Add</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="clearfix">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- *** LEFT COLUMN ***
+			 _________________________________________________________ -->
+
+                    <div class="col-md-8 col-md-offset-2 clearfix" id="customer-account">
+                        <h3 class="lead">Welcome to your Profile Page. Create and make changes here</h3>
+                        <hr>
+                        <form action="/profile/add/" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class='col-sm-6'>
+							<div class="heading">
+							<h3>Owner's Details</h3>
+							</div>	
+							<h4>Name: </h4> <h5>{{ truck_form.owner_name }}</h5>
+							<p><font style='color: red'>{{ truck_form.owner_name.errors }}</font></p>
+							<h4>Email: </h4> <h5>{{ truck_form.email }}</h5>
+							<p><font style='color: red'>{{ truck_form.owner_name.errors }}</font></p>
+							<h4>Contact Number: </h4> <h5>{{ truck_form.contact_number }}</h5>
+							</br>
+							<div class="heading">
+							<h3>Bank Details</h3>
+							</div>	
+							<p>Your nominated bank account. Payments to you will be via bank transfer.</p>
+							<h4>Bsb: </h4> <h5>{{ truck_form.bsb }}</h5>
+							<h4>Account No: </h4> <h5>{{ truck_form.account_number }}</h5>
+							</br>
+						</div>
+						<div class='col-sm-6'>
+							<div class="heading">
+							<h3>Food Truck's Details</h3>
+							</div>
+							<h4>Food Truck's Name: </h4> <h5>{{ truck_form.foodtruck_name }}</h5>
+							<p><font style='color: red'>{{ truck_form.foodtruck_name.errors }}</font></p>
+							<h4>Url on getdelicious: </h4> <h5>www.getdelicious.com.au/{{ truck_form.slug }}</h5>
+							<p><font style='color: red'>{{ truck_form.slug.errors }}</font></p>
+							<p>Your page's url will be set to your preference. No spaces.</p>
+							<p>For example <span><strong>foodtruck-name</strong></span> will appear as 
+								<strong>www.getdelicious.com.au/foodtruck-name</strong></p>
+							<p>If you can't decide, just enter your foodtruck's name without spaces.</p>
+							<h4>Operating State: </h4> <h5>{{ truck_form.operating_state }}</h5>
+							<p><font style='color: red'>{{ truck_form.operating_state.errors }}</font></p>
+							<h4>Logo: </h4> <h5>{{ truck_form.logo }}</h5>
+							<p>Square images works best</p>
+							<h4>Slogan: </h4> <h5>{{ truck_form.slogan }}</h5>
+							<h4>About Us: </h4> <h5>{{ truck_form.about_us }}</h5>
+						</div>
+							<br>
+						<div class='text-center'>
+							<input type="submit" value="Save" class="btn btn-template-main" />
+							<input type="button" onclick="goBack()" value="Cancel" class="btn btn-danger" />
+						</div>
+						</form>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+{% block extra_js %}
+
+	<script>
+
+		function goBack() {
+    	window.history.back()
+		}
+
+	</script>
+
+{% endblock %}
+{% endblock %}

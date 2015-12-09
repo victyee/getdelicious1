@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block layout_head_title %}
+About - getDelicious
+{% endblock %}
+
+{% block extra_css %}
+{% load staticfiles %}
+<!-- <link rel="stylesheet" href="{% static "css/template.css" %}" /> -->
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>About us</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>About us</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+
+        <section>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="heading text-center">
+                        <h2 style="text-transform: lowercase; font-family: 'Montserrat';color:#c50707" ;>getdelicious</h2>
+                    </div>
+
+                    <p class="lead">Founded by a group of foodies with an acquired taste for seriously delicious food - awesome food trucks. We work along side amazing food truck owners to create a seamless and transparent process to book a food truck.</p>
+
+                    <p class="lead"><span style="font-family: 'Montserrat';color:#c50707">getdelicious</span> is proudly made in Melbourne.</p>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /#contact.container -->
+</div>
+<!-- /#content -->
+
+{% endblock %}
+
+{% block extra_js_libs %}
+	
+{% endblock %}

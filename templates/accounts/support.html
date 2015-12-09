@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block layout_head_title %}
+Privacy - getDelicious
+{% endblock %}
+
+{% block extra_css %}
+{% load staticfiles %}
+<!-- <link rel="stylesheet" href="{% static "css/template.css" %}" /> -->
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Support</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>Support</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <section>
+                    <div class="row">
+
+                        <div class="col-md-12 clearfix">
+
+                            <div id="text-page">
+                                <div class='heading text-center'>
+                                    <h2>Hello {{ foodtruck.owner_name }}</h2>
+                                </div>
+                                <p class="lead text-center">We've put up a documentation of all the features and functions of <span style="font-family:'Montserrat'; color:#c50707;">getdelicious</span> and hopefully it could help you out when you're in a pickle!</p>
+                                <p class="lead text-center">This documentation will guide you through the setup and get you up and running in no time.</p>
+
+                                <div class='heading'>
+                                    <h4>Getting Started</h4>
+                                </div>
+                                <h4>Accessing features and functions</h4>
+                                <p>All features and functions are accessed through the dropdown menu on the top right hand corner. Here you can setup your food truck's profile and manage your food packages.</p>
+                                <hr>
+
+                                <h4>Your food truck's profile</h4>
+								<p>This is the first thing you'll need to setup. Just follow through collumns and fill in the required fields. After you've completed the profile, you may realise that your profile is not live yet. This is because you need to add at least 1 food package.</p>
+                                <hr>
+
+								<h4>Adding food packages</h4>
+								<p>Next you'll start creating food packages. You can create as many as you like, so take you time and be creative with your packages! Once you've added a package, you'll see your food truck live!</p>
+                                <hr>
+
+                                <h4>What's this 'service hours' and 'kms'?</h4>
+                                <p>We make it easy for you to include additional costs if required.</p>
+                                <p><strong>Included Service Hours: </strong> You just need to put the number of food service hours included in the package. In general, 2 hours should be sufficient.</p>
+                                <p><strong>Included Travelling: </strong> Similarly, just enter the amount of included kilometers you're willing to travel from the CBD.</p>
+                                <p><strong>Additional Service Hours: </strong> In the event that additional hours are required, just set the rate of how much you'll charge per additional hour.</p>
+                                <p><strong>Additional Travelling: </strong>Here you'll enter the additional charge per km that you'll need to travel to the client's venue.</p>
+
+                                <hr/>
+                                <div class='heading'>
+                                    <h4>Accepting Jobs</h4>
+                                </div>
+                                <p>When a customer books you for a job, you'll be notified via email. You'll have up to 48 hours to accept the booking. If you have any queries for the customer, you can reply directly on the email.</p>
+
+                                <hr/>
+                                <div class='heading'>
+                                    <h4>Fees and Payments</h4>
+                                </div>
+								<h4>Fees</h4>
+								<p>There are no fees for being listed on <span style="font-family:'Montserrat'; color:#c50707;">getdelicious</span>. We take a percentage off each confirmed job booked through <span style="font-family:'Montserrat'; color:#c50707;">getdelicious</span></p>
+
+                                <p>For each job, we take a 8% fee + 2% transaction fee.</p>
+
+								<hr/>
+								<h4>Payments</h4>
+								<p>All payments to you will be via bank transfer.</p>
+                                <p>Once you've accepted a booking, we will transfer a 20% non refundable deposit to your nominated bank account. The balance will be transferred 1 day after the event ends. If the job get cancelled, you get to keep the 20% non refundable deposit.</p>
+
+                                <hr/>
+                                <div class='heading'>
+                                    <h4>Can't find what you're looking for?</h4>
+                                </div>
+                                <p>Not a problem. Just email us at <span style="font-family:'Montserrat'; color:#c50707;">hungry@getdelicious.com.au</span> 
+                            </div>
+
+
+                        </div>
+                        <!-- /.col-md-12 -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+{% endblock %}
+
+{% block extra_js_libs %}
+	
+{% endblock %}

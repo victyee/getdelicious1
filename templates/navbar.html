@@ -1,0 +1,86 @@
+<div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+                    <div class="container">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand home" href="{% url 'home' %}">
+                                <img src="{{ STATIC_URL }}img/logo.png" alt="getdelicious logo" class="hidden-xs hidden-sm">
+                                <img src="{{ STATIC_URL }}img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm" style="margin-top: 10px"><span class="sr-only">getdelicious</span>
+                            </a>
+                            <div class="navbar-buttons">
+                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.navbar-header -->
+
+                        <div class="navbar-collapse collapse" id="navigation">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown use-yamm yamm-fw">
+                                    <a href="{% url 'cart' %}">Cart <span class="badge">{% if not request.session.items_total %} 0 {% else %} {{ request.session.items_total }} {% endif%}</span></b></a>
+                                </li>
+                                {% if not user.is_authenticated %}
+                                <li class="dropdown use-yamm yamm-fw">
+                                    <a href="{% url 'auth_login' %}">Login </b></a>
+                                </li>
+                                <li class="dropdown use-yamm yamm-fw">
+                                    <a href="{% url 'auth_register' %}">Sign Up </b></a>
+                                </li>
+                                {% endif %}
+                                {% if user.is_authenticated %}
+                                {% if user.truckownerstatus.foodtruck_owner == True %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_username }} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'profile' %}">Profile</a></li>
+                                        <li><a href="{% url 'packages' %}">Packages</a></li>
+
+<!--                                         {% if truck_name.availability_link %}
+                                        <li><a href="{{ truck_name.availability_link }}" target="_blank">Availabilities</a></li>
+                                        {% else %}
+                                        <li><a href='#'>Availabilities <br/>(will be assigned shortly)</a></li>
+                                        {% endif %} -->
+                                        <li><a href="{% url 'support' %}">Support</a></li>
+                                        <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                                {% endif %}
+                                {% endif %}
+                            </ul>
+
+                        </div>
+
+                        <!--/.nav-collapse -->
+
+                        <div class="collapse clearfix" id="search">
+
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                </span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </div>
+
+
+                </div>
+                <!-- /#navbar -->
+
+            </div>
+
+            <!-- *** NAVBAR END *** -->

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+
+Operator - Add Package
+
+
+{% load staticfiles %}
+
+
+{% block content %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Edit</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li><a href="{% url 'packages' %}">Packages</a></li>
+                            <li>Edit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="clearfix">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- *** LEFT COLUMN ***
+			 _________________________________________________________ -->
+
+                    <div class="col-md-12" id="customer-account">
+                        <h3 class="lead">Edit {{ package }}</h3>
+                        <hr>
+                        <form action="/packages/edit/{{ vid }}/" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="col-md-12">
+				        		<h4 class="text-center">Package Name: </h4>
+				                <div class="heading text-center">
+				                    <h4>{{ packages_form.title }}</h4>
+				                    <p><font style='color: red'>{{ packages_form.title.errors }}</font></p>
+				                </div>
+				                <div class="col-md-4">
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Pricing</h5>
+				                    </div>
+				                    <p>${{ packages_form.price_per_guest }} per person</p>
+				                    <p><font style='color: red'>{{ packages_form.price_per_guest.errors }}</font></p>
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Minimum</h5>
+				                    </div>
+				                    <p>{{ packages_form.minimum_guests }} guests</p>
+				                    <p><font style='color: red'>{{ packages_form.minimum_guests.errors }}</font></p>
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Maximum</h5>
+				                    </div>
+				                    <p>{{ packages_form.maximum_guests }} guests</p>
+				                    <p><font style='color: red'>{{ packages_form.maximum_guests.errors }}</font></p>
+				                </div>
+				                <div class="col-md-4">
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Includes</h5>
+				                    </div>
+				                    <p>{{ packages_form.included_service_hours }} hours of food service</p>
+				                    <p><font style='color: red'>{{ packages_form.included_service_hours.errors }}</font></p>
+				                    <p>Travelling of up to {{ packages_form.included_travel_distance }} kms from CBD</p>
+				                    <p><font style='color: red'>{{ packages_form.included_travel_distance.errors }}</font></p>
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Additional</h5>
+				                    </div>
+				                    <p>${{ packages_form.extra_hours_charge }} per extra hour</p>
+				                    <p><font style='color: red'>{{ packages_form.extra_hours_charge.errors }}</font></p>
+				                    <p>${{ packages_form.extra_km_charge }} per extra kilometer</p>
+				                    <p><font style='color: red'>{{ packages_form.extra_km_charge.errors }}</font></p>
+				                </div>
+				                <div class="col-md-4">
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Dietary</h5>
+				                    </div>
+				                    <h5>Tick if available</h5>
+				                    <p>Gluten free options upon request: </p>{{ packages_form.gluten_free_options_upon_request }}
+									<p>Vegetarian options upon request: </p>{{ packages_form.vegetarian_options_upon_request }}
+				                </div>
+				                <div class="col-md-4 hidden">
+				                    <div class="heading" style="margin-bottom: 0px">
+				                        <h5 style="margin-bottom: 15px">Status</h5>
+				                    </div>
+				                    {{ packages_form.active }}
+				                </div>
+				                <div class="col-md-12">
+				                    <p><strong>MENU: </strong></p>
+				                    <p>Best to be specific and include food choices, if applicable.</p>
+				                    <blockquote>
+				                        <p><em>{{ packages_form.menu }}</em>
+				                        </p>
+				                    </blockquote>
+				                    </br>
+				                </div>
+				            </div>
+				            <div class="col-md-12">
+				                <hr>
+				        </div>
+							<br>
+						<div class="text-center">	
+							<input type="submit" value="Save" class="btn btn-template-main" />
+							&nbsp; &nbsp;
+							<input type="button" onclick="goBack()" value="Cancel" class="btn btn-danger" />
+						</div>
+						</form>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+{% block extra_js %}
+
+	<script>
+
+		function goBack() {
+    	window.history.back()
+		}
+
+	</script>
+
+{% endblock %}
+{% endblock %}

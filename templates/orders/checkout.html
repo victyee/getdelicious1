@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+
+<script>
+{% block jquery %}
+
+$(".radio-label").click(function(){
+  $("label").removeClass('radio-label-selected');
+  $(this).addClass('radio-label-selected');
+});
+
+// $(".billing-label").click(function(){
+//   $("label").removeClass('billing-label-selected');
+//   $(this).addClass('billing-label-selected');
+// });
+
+
+  // This identifies your website in the createToken call below
+  Stripe.setPublishableKey('{{ stripe_pub }}');
+
+
+jQuery(function($) {
+  $('#payment-form').submit(function(event) {
+    var $form = $(this);
+
+    // Disable the submit button to prevent repeated clicks
+    $form.find('button').prop('disabled', true);
+
+    Stripe.card.createToken($form, stripeResponseHandler);
+
+    // Prevent the form from submitting with the default action
+    return false;
+  });
+});
+
+
+function stripeResponseHandler(status, response) {
+  var $form = $('#payment-form');
+
+  if (response.error) {
+    // Show the errors on the form
+    $("#card_errors_div").removeClass("hidden");
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    $("#card_errors_div").addClass("hidden");
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // and submit
+    $form.get(0).submit();
+  }
+};
+
+
+$("#addShippingAddress").click(function(e){
+  e.preventDefault();
+  $("#shippingAddressForm").fadeToggle();
+
+})
+
+{% if not current_addresses  %}
+  $("#shippingAddressForm").fadeToggle();
+{% endif %}
+
+{% endblock %}
+</script>
+
+<style>
+{% block styles %}
+
+.radio-label {
+  font-size: 22px;
+  font-weight: normal;
+  padding: 4px 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.radio-label input[type=radio] {
+  display: none;
+}
+
+.radio-label:hover {
+  font-size: 22px;
+  font-weight: normal;
+/*  background-color: #428bca;*/
+  color: black;
+  cursor: pointer;
+
+}
+
+.radio-label-selected {
+  font-size: 22px;
+  font-weight: normal;
+/*  background-color: #428bca;*/
+  color: black;
+  cursor: pointer;
+}
+
+
+@media(min-width: 1200px) {
+  .total { 
+    position: fixed;
+  }
+}
+
+{% endblock %}
+</style>
+
+
+{% block content %}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Checkout</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li><a href='{% url "cart" %}'>Cart</a>
+                    </li>
+                    <li>Checkout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <div class="col-md-12">
+    <div class="heading text-center">
+      <h2>Event details</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <form method='POST' action="" id="payment-form"> {% csrf_token %}
+    {% if current_addresses  %}
+      <div class='col-md-12 text-center'>
+        <a href="{% url 'add_address' %}" id='addShippingAddress' class="btn btn-template-main">Edit Details</a>
+      </div>
+      </br>
+      </br>
+      </br>
+      <div class='col-md-12'>
+        {% for address in current_addresses %}
+          {% if request.user.userdefaultaddress.shipping.id == address.id %}
+          <div class='col-md-4 col-md-offset-1'>
+            <div class="heading">
+              <h4>Your details</h4>
+            </div>
+            <div>
+              <h4>Name: </h4>
+              <p>{{ address.contact_person_name }}</p>
+            </div>
+            <div>
+              <h4>Contact Number: </h4>
+              <p>{{ address.phone }}</p>
+            </div>
+            <div>
+              <h4>Email: </h4>
+              <p>{{ address.email }}</p>
+            </div>
+          </div>
+          <div class='col-md-3'>
+            <div class="heading">
+              <h4>When</h4>
+            </div>
+            <div>
+              <h4>Event Date: </h4>
+              <p>{{ address.date }}</p>
+            </div>
+            <div>
+              <h4>Start Time: </h4>
+              <p>{{ address.time_from }}</p>
+            </div>
+            <div>
+              <h4>End Time: </h4>
+              <p>{{ address.time_to }}</p>
+            </div>
+          </div>
+          <div class='col-md-3'>
+            <div class="heading">
+              <h4>Where</h4>
+            </div>
+            <div>
+              <h4>Address Line 1: </h4>
+              <p>{{ address.address }}</p>
+            </div>
+            {% if address.address2 %}
+            <div>
+              <h4>Address Line 2: </h4>
+              <p>{{ address.address2 }}</p>
+            </div>
+            {% endif %}
+            <div>
+              <h4>City: </h4>
+              <p>{{ address.city }}</p>
+            </div>
+            <div>
+              <h4>State: </h4>
+              <p>{{ address.state }}</p>
+            </div>
+            <div>
+              <h4>Postcode: </h4>
+              <p>{{ address.postcode }}</p>
+            </div>
+            <input type='radio' name='shipping_address' value='{{ address.id }}' checked='checked' style='display: none;'/>
+          </div>
+          <div class='col-md-12'>
+            <hr>
+          </div>
+          <div class='col-md-12'>
+            {% if address.message %}
+            <div class="heading text-center">
+              <h4>Message</h4>
+              <p>{{ address.message|linebreaks }}</p> 
+            </div>
+            {% else %}
+            <div class="heading text-center">
+              <h4>Message</h4>
+              </br>
+              </br>
+              <p class='lead'>You Did Not Save Any Message</p> 
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+        {% endfor %}
+        <div class='col-md-12'>
+          <hr>
+        </div>
+        </br>
+        </br>
+      </div>
+    {% else %}
+    <div class='col-sm-12 text-center'>
+        <h3 class='lead'>We're Almost Done! Fill In Your Event's Details</h3>
+        <form method='POST' action="" id="payment-form"> {% csrf_token %}
+          <a href="{% url 'add_address' %}" class="btn btn-template-main">Add Details</a>
+        </form>
+      </br>
+      </br>
+      <hr>
+    </div>
+
+    {% endif %}
+    {% if current_addresses %}
+    <div class='col-md-6 col-md-offset-3'>
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a href="#"><i class="fa fa-credit-card"></i><br>Payment Info</a>
+            </li>
+        </ul>
+          <div id='card_errors_div' class="alert alert-danger hidden payment-errors" role="alert"></div>
+          <div class="form-row">
+            <div class='row'>
+                <div class='col-xs-9' style='padding-right:0px;'>
+                    <b>Card Number</b>
+                    <input class='form-control' type="text" size="20" data-stripe="number"/>
+                </div>
+                <div class='col-xs-5'>
+                    <b>CVC</b>
+                    <input class='form-control' type="text" size="4" data-stripe="cvc"/>
+                </div>
+            </div>
+          </div>
+          <br/>
+
+          <div class="form-row">
+            <b>Expiration (MM/YYYY)</b>
+            <div class='row'>
+                <div class='col-xs-4' style='padding-right:0px;'>
+                    <input class='form-control'  type="text" size="2" data-stripe="exp-month" placeholder='2'/>
+                </div>
+                <div class='col-xs-5'>
+                    <input  class='form-control' type="text" size="4" data-stripe="exp-year" placeholder='2017'/>
+                </div>
+            </div>
+          </div>
+          <h3 class='lead'>Total: ${{ final_amount }}</h3>
+          <hr>
+          <p class='lead'><strong>IMPORTANT:</strong> If you're having error when submiting, please allow the browser to finish loading before submiting.</p>
+          <p>You'll not be charged until the operators accepts the booking request. We'll let you know once it's accepted. Please allow 1 - 2 days.</p>
+          
+          <div class="box-footer">
+          </br>
+            <div>
+                <button type="submit" class="btn btn-template-main">Submit Booking Request<i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+            </br>
+            </br>
+          </div>
+        </div>
+        {% endif %}
+    </form>
+  </div>
+</div>
+
+        <!-- /.col-md-9 -->
+
+        <!-- <div class="col-md-3">
+            <div class="box" id="order-summary">
+                <div class="box-header">
+                    <h3>Booking summary</h3>
+                </div>
+                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>{{ cartitem }}</td>
+                                <th>$446.00</th>
+                            </tr>
+                            <tr>
+                                <td>Shipping and handling</td>
+                                <th>$10.00</th>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <th>$0.00</th>
+                            </tr>
+                            <tr class="total">
+                                <td>Total</td>
+                                <th>${{ order.get_final_amount }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div> -->
+        <!-- /.col-md-3 -->
+</div>
+<!-- /.container -->
+
+
+
+
+{% endblock %}
+       

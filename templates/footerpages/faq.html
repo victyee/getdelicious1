@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block layout_head_title %}
+FAQ - getDelicious
+{% endblock %}
+
+{% block extra_css %}
+{% load staticfiles %}
+<!-- <link rel="stylesheet" href="{% static "css/template.css" %}" /> -->
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>FAQ</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>Frequently asked questions</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <!-- *** LEFT COLUMN ***
+			 _________________________________________________________ -->
+
+                    <div class="col-md-12 clearfix">
+                        <section>
+
+                            <div class="panel-group" id="accordion">
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq1" style="text-decoration: none">
+
+						    1. What is getdelicious?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq1" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p><span style="font-family:'Montserrat'; color:#c50707;">getdelicious</span> is the place to book delicious food trucks for your event!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="text-decoration: none">
+
+						    2. How does it work?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" style="text-decoration: none">
+                                        <div class="panel-body">
+                                            <p>Easy!</p>
+                                            <ul>
+                                                <li>Start by selecting your state.</li>
+                                                <li>Select a food truck.</li>
+                                                <li>Checkout the menus, prices and availabilities.</li>
+                                                <li>Enter your details.</li>
+                                                <li>And done!.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none">
+
+						    3. How does payment work?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Once you submit a booking request, we'll place a hold on your credit card. 
+                                            You'll NOT be charged until the food truck operator
+                                            accepts your booking. Allow 1 to 2 days.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq4" style="text-decoration: none">
+
+						    4. How do I know my booking has been confirmed?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq4" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>It usually take 1 to 2 day for the food truck operator to accpet booking requests. Once accepted, you will receive a confirmation email. You will NOT be charged until the food truck operator accepts your booking</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq5" style="text-decoration: none">
+
+						    5. I've got a change of plan
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq5" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>We understand sometimes things don't go according to plan, and you might need to make changes. At this point, it is best to speak directly to the food truck operators. Depending on the situation, they may accommodate changes at their discretion.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq6" style="text-decoration: none">
+
+						    6. Can I change my order details after confirmation?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq6" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Just shoot us an email. You can finalise guest numbers a week before the event's date - number of guests cannot fall below the minimum required. Other changes (such as dates, service hours, etc) are STRICTLY subject to the operator.</p>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq7" style="text-decoration: none">
+
+						    7. Refund / Cancellation Policy?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq7" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>We'll refund 70% of the payment if cancellations are made after booking confirmation. No refund if cancellation is
+                                            	 made within 1 week of the event's date.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion" href="#faq8" style="text-decoration: none">
+
+						    8. How do I get my food truck listed on the website?
+
+						</a>
+
+					    </h4>
+                                    </div>
+                                    <div id="faq8" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Simply <a href="{% url 'auth_register' %}">signup</a> and make sure you tick the 'food truck owner' box</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+                        <a data-toggle="collapse" data-parent="#accordion" href="#faq9" style="text-decoration: none">
+
+                            9. Nothing is showing up in my state
+
+                        </a>
+
+                        </h4>
+                                    </div>
+                                    <div id="faq9" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Bummer, check back later or <a href="{% url 'contact' %}">send</a> us your requirements and we'll help you out!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+                        <a data-toggle="collapse" data-parent="#accordion" href="#faq10" style="text-decoration: none">
+
+                            10. How do I fill in additional service hours and additional kms?
+
+                        </a>
+
+                        </h4>
+                                    </div>
+                                    <div id="faq10" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>All packages includes a certain amount of service hours and travels in kilometers. You only need to 
+                                                add extra hours you need in addition to what is provided.
+                                                Same goes with extra kms. If your venue is further than what is included, just enter the extra amount.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+
+                        <a data-toggle="collapse" data-parent="#accordion" href="#faq11" style="text-decoration: none">
+
+                            11. Nice background photo!
+
+                        </a>
+
+                        </h4>
+                                    </div>
+                                    <div id="faq11" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Credits to Justin Lee Photography
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+
+                                </div>
+
+
+                            </div>
+                            <!-- /.panel-group -->
+
+                            <p class="text-muted">Can't find what you're looking for? Drop us a <a href="{% url 'contact' %}">message</a>, we'll be happy to help!</p>
+                        </section>
+
+                    </div>
+                    <!-- /.col-md-9 -->
+
+                    <!-- *** LEFT COLUMN END *** -->
+
+                    <!-- *** RIGHT COLUMN ***
+				_________________________________________________________ -->
+
+                    
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** RIGHT COLUMN END *** -->
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+ 
+
+
+    
+
+{% endblock %}
+
+{% block extra_js_libs %}
+	
+{% endblock %}
+
+

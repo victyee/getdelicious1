@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>{{ form_title }}</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>{{ form_title }}</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 ">
+                        <div class="box">
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <div class="heading">
+                                        <h2>{{ caption }}</h2>
+                                        <h2>{{ non_member }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <form method='POST' action='' enctype="multipart/form-data">
+                                {% csrf_token %} 
+                                {% for field in form %}
+                                <fieldset class="form-group">
+                                  <h4><label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label><h4>
+                                      <input type="text" class="form-control"
+                                        name="{{ field.name }}"
+                                        id="id_{{ field.name }}"> 
+                                        <p class="help-text" style="font-size: 14px;">{{ field.help_text }} </p>
+                                        <p><font color="red" size="3px">{{ field.errors }}</p>
+                                </fieldset>
+                                {% endfor %}
+                                </br>
+                                <hr>
+                                {% for field in foodtruck_form %}
+                                <div class='row'>
+                                    <div class='col-md-4 pull-left'>
+                                <fieldset class="form-group pull-left">
+                                  <h4><label class="control-label pull-left" for="id_{{ field.name }}">{{ field.label }}?</label></h4>
+                                      <input type="checkbox" class="form-control pull-left"
+                                        name="{{ field.name }}"
+                                        id="id_{{ field.name }}"> 
+                                        <p class="help-text">{{ field.help_text }} </p>
+                                </fieldset>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                    
+                                {% for field in foodtruck_name %}
+                                <fieldset class="form-group">
+                                  <h4><label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label></h4>
+                                      <input type="text" class="form-control"
+                                        name="{{ field.name }}"
+                                        id="id_{{ field.name }}"> 
+                                        <p class="help-text">{{ field.help_text }} </p>
+                                </fieldset>
+                                {% endfor %}
+                                <input type='submit' value='{% if submit_btn %}{{ submit_btn }}{% else %}Submit{% endif %}' class="btn btn-template-main center-block" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+{% endblock %}
+ 

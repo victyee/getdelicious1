@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block layout_head_title %}
+Contact - getdelicious
+{% endblock %}
+
+{% block extra_css %}
+{% load staticfiles %}
+<!-- <link rel="stylesheet" href="{% static "css/template.css" %}" /> -->
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Contact Us</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'contact' %}">Home</a>
+                    </li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container" id="contact">
+        <section>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <section>
+                        <div class="heading">
+                            <h2>We're here to help you</h2>
+                        </div>
+                        <p class="lead">Are you curious about something? Need some help with the site?</p>
+                        <p class="lead">Please feel free to contact us, our customer service ninjas will sort it out for you.</p>
+                        <p class="lead"><span style="font-family:'Montserrat'; color:#c50707;">hungry@getdelicious.com.au</span></p>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="heading">
+                        <h2>Contact form</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+                    <form method="POST" action='{% url "contact" %}'> {% csrf_token %}
+                        <div class="heading">
+                            <h4 class="heading text-center" style="margin-bottom: -50px;">Name: </h4>
+                        </div>
+                        <p>{{ contact_us_form.name }}</p>
+                        <p><font style='color: red'>{{ contact_us_form.name.errors }}</font></p>
+                        <div class="heading">
+                            <h4 class="heading text-center" style="margin-bottom: -50px;">Email: </h4>
+                        </div>
+                        <p>{{ contact_us_form.email }}</p>
+                        <p><font style='color: red'>{{ contact_us_form.email.errors }}</font></p>
+                        <div class="heading">
+                            <h4 class="heading text-center" style="margin-bottom: -50px;">Contact Number: </h4>
+                        </div>
+                        <p>{{ contact_us_form.contact_number }}</p>
+                        <div class="heading">
+                            <h4 class="heading text-center" style="margin-bottom: -50px;">Subject: </h4>
+                        </div>
+                        <p>{{ contact_us_form.subject }}</p>
+                        <p><font style='color: red'>{{ contact_us_form.subject.errors }}</font></p>
+                        <div class="heading">
+                            <h4 class="heading text-center" style="margin-bottom: -50px;">Message: </h4>
+                        </div>
+                        <p>{{ contact_us_form.message }}</p>
+                        <p><font style='color: red'>{{ contact_us_form.message.errors }}</font></p>
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" class="btn btn-template-main"><i class="fa fa-envelope-o"></i> Send message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.row -->
+        </section>
+    </div>
+    <!-- /#contact.container -->
+</div>
+<!-- /#content -->
+
+{% endblock %}
+
+{% block extra_js_libs %}
+    
+{% endblock %}

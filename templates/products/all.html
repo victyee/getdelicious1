@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>{{ state }}</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>{{ state }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>{{ caption }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row products">
+            {% for truck in trucks %}
+            {% if truck.variation_set.all %}
+            <div class="col-md-3 col-sm-4">
+                <div class="product">
+                    {% if truck.logo %}
+                    <div class="image" style="width:200px; height:200px; margin:0 auto";>
+                        <a href="{{ truck.get_absolute_url }}">
+                            <img src="{{ MEDIA_URL }}{{ truck.logo }}" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="image" style="width:200px; height:200px; margin:0 auto";>
+                        <a href="{{ truck.get_absolute_url }}">
+                            <img src="{{ STATIC_URL }}img/placeholder.svg" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- /.image -->
+                    <div class="text">
+                        <div class="heading">
+                            <h5><a href="{{ truck.get_absolute_url }}" style="text-decoration: none; color: black;">{{ truck }}</a></h5>
+                        </div>
+                    </div>
+                    <!-- /.text -->
+                </div>
+                <!-- /.product -->
+            </div>
+            {% endif %}
+            {% endfor %}
+
+            {% if not trucks %}
+            <div class="text text-center">
+                <i class="fa fa-frown-o fa-5x"></i>
+                <h3>Bummer, no food trucks here at the moment. </br>Check back later or shoot us an email of what you're after. <br>
+                    We'll hook you up with a food truck =)
+                </h3>
+                </br>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- /.products -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->
+
+
+{% endblock %}

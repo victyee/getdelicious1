@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>{{ form_title }}</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li><a href='{% url "cart" %}'>Cart</a>
+                    </li>
+                    <li><a href='{% url "checkout" %}'>Checkout</a>
+                    </li>
+                    <li>{{ form_title }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+                    <div class='col-md-12'>
+                        <div class='col-md-4'>
+                            <div class="heading">
+                                <h4>Your details</h4>
+                            </div>
+                            <div>
+                                <h4>Name: </h4>
+                                <h4>{{ form.contact_person_name }}</h4>
+                                <p><font style='color: red'>{{ form.contact_person_name.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>Contact Number: </h4>
+                                <h4>{{ form.phone }}</h4>
+                                <p><font style='color: red'>{{ form.phone.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>Email: </h4>
+                                <h4>{{ form.email }}</h4>
+                                <p><font style='color: red'>{{ form.email.errors }}</font></p>
+                            </div>
+                        </div>
+                        <div class='col-md-4'>
+                            <div class="heading">
+                                <h4>When</h4>
+                            </div>
+                            <div>
+                                <h4>Date (DD/MM/YYYY): </h4>
+                                <h4>{{ form.date }}</h4>
+                                <p><font style='color: red'>{{ form.date.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>Start Time: (eg: 7.30pm)</h4>
+                                <h4>{{ form.time_from }}</h4>
+                                <p><font style='color: red'>{{ form.time_from.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>End Time: (eg: 9.30pm)</h4>
+                                <h4>{{ form.time_to }}</h4>
+                                <p><font style='color: red'>{{ form.time_to.errors }}</font></p>
+                            </div>
+                        </div>
+                        <div class='col-md-4'>
+                            <div class="heading">
+                                <h4>Where</h4>
+                            </div>
+                            <div>
+                                <h4>Address Line 1: </h4>
+                                <h4>{{ form.address }}</h4>
+                                <p><font style='color: red'>{{ form.address.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>Address Line 2: </h4>
+                                <h4>{{ form.address2 }}</h4>
+                                <p><font style='color: red'>{{ form.address2.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>City: </h4>
+                                <h4>{{ form.city }}</h4>
+                                <p><font style='color: red'>{{ form.city.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>State: </h4>
+                                <h4>{{ form.state }}</h4>
+                                <p><font style='color: red'>{{ form.state.errors }}</font></p>
+                            </div>
+                            <div>
+                                <h4>Postcode: </h4>
+                                <h4>{{ form.postcode }}</h4>
+                                <p><font style='color: red'>{{ form.postcode.errors }}</font></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div class="heading">
+                            <h4>Message</h4>
+                            </br>
+                            </br>
+                            <div class="lead">
+                                <p>If applicable, please include food choices and dietary requirements</p>
+                            </div>
+                        </div>
+                        <h4>{{ form.message }}</h4>
+                        <input type='radio' name='shipping_address' value='{{ address.id }}' checked='checked' style='display: none;'/>
+                        <div class='lead'>
+                            <p>{{ form.default }} I confirm all details are correct</p>
+                        </div>
+                        </br>
+                        <input type='submit' value='{% if submit_btn %}{{ submit_btn }}{% else %}Submit{% endif %}' class='btn btn-template-main' />
+                        <input type="button" onclick="goBack()" value="Cancel  " class='btn btn-danger'/>
+                        </br>
+                        </br>
+                        </br>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+    <!-- /.container -->
+<!--     {{ form.as_p }} -->
+</div>
+<!-- /#content -->
+
+
+{% block extra_js %}
+
+  <script>
+
+    function goBack() {
+      window.history.back()
+    }
+
+  </script>
+
+{% endblock %}
+
+{% endblock %}

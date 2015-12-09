@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+
+Operator Profile
+
+
+{% load staticfiles %}
+
+
+{% block content %}
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Profile</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+
+                            <li><a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- *** LEFT COLUMN ***
+			 _________________________________________________________ -->
+		 		{% if not trucks %}
+		 		<div class="col-md-12 text-center" id="customer-account">
+		 			<h3 class="lead">Hello {{ user }}</h3>
+                    <h3 class="lead">Let's get started by adding your Foodtruck's Profile Page.</h3>
+                    <hr>
+                    <a href="{% url 'profile_add' %}" class="btn btn-template-main">Add My Foodtruck</a>
+		 		</div>
+				{% else %}
+
+			 		{% for truck in trucks %}
+                    <div class="col-md-12 text-center">
+                    	 <div class="heading">
+                            <h2>Hello {{ truck.owner_name }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <h3 class="lead">Welcome to your Profile Page. Create and make changes here for</h3>
+                        <h3 class="lead">www.getdelicious.com.au/{{ truck.slug }}</h3>
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+	                    <div class="col-md-4 col-md-offset-2">
+							<div class="clear"></div>
+							<table>
+								<div class="heading">
+									<h3>Owner's Details</h3>
+								</div>
+								<tr>
+									<td><label><h5>Name: &nbsp;</h5></label></td>
+									<td>{{ truck.owner_name }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Email: &nbsp;</h5></label></td>
+									<td>{{ truck.email }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Contact Number: &nbsp;</h5></label></td>
+									<td>{{ truck.contact_number }}</td>
+								</tr>
+							</table>
+							<table>
+								<div class="heading">
+									<h3>Bank Details</h3>
+								</div>
+								<tr>
+									<td><label><h5>BSB: &nbsp;</h5></label></td>
+									<td>{{ truck.bsb }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Account No: &nbsp;</h5></label></td>
+									<td>{{ truck.account_number }}</td>
+								</tr>
+							</table>
+							<table>
+								<div class="heading">
+									<h3>Availability</h3>
+								</div>
+                                    {% if truck.availability_link %}
+                                    <a href="{{ truck.availability_link }}" class="btn btn-primary" target="_blank">Check/Change</a>
+                                    {% else %}
+                                    <a href='#' class="btn btn-primary disabled">Setting up your calendar</a>
+                                    {% endif %}
+								<tr>
+							</table>
+						</div>
+						<div class="col-md-6">
+							<table>
+								<div class="heading">
+								<h3>Food Truck's Details</h3>
+								</div>
+								<tr>
+									<td><label><h5>Food Truck's Name: &nbsp;</h5></label></td>
+									<td>{{ truck }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Slogan: &nbsp;</h5></label></td>
+									<td>{{ truck.slogan }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Operating State: &nbsp;</h5></label></td>
+									<td>{{ truck.operating_state }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>About: &nbsp;</h5></label></td>
+									<td>{{ truck.about_us }}</td>
+								</tr>
+								<tr>
+									<td><label><h5>Logo: &nbsp;</h5></label></td>
+									<td><img src="{{ MEDIA_URL }}{{ truck.logo }}"></td>
+								</tr>
+						    </table>
+							</br>
+						</div>
+						{% endfor %}
+						<div class="col-md-12 text-center">
+						    <a href="{% url 'profile_edit' %}" class="btn btn-template-main">Edit</a>
+						    </br>
+						</br>
+						</br>
+						</br>
+						</div>
+					</div>
+                </div>
+                <!-- /.row -->
+                {% endif %}
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+{% block extra_js %}
+
+	<script>
+
+		function goBack() {
+    	window.history.back()
+		}
+
+	</script>
+
+{% endblock %}
+{% endblock %}

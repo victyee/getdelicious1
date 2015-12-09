@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+<div class="page-header">
+  <h1>{{ product.foodtruck_name }}</h1>
+</div>
+
+{% block content %}
+
+
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>{{ product.foodtruck_name }}
+                    </br>
+                    <span>
+                        <h5>{{ product.slogan }}</h5>
+                    </span>
+                </h1>
+                
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="{% url 'home' %}">Home</a>
+                    </li>
+                    {% if product.operating_state == "VIC" %}
+                    <li><a href="{% url 'victoria' %}">Victoria</a>
+                    </li>
+                    {% endif %}
+                    {% if product.operating_state == "NSW" %}
+                    <li><a href="{% url 'new_south_wales' %}">New South Wales</a>
+                    </li>
+                    {% endif %}
+                    {% if product.operating_state == "SA" %}
+                    <li><a href="{% url 'new_south_wales' %}">South Australia</a>
+                    </li>
+                    {% endif %}
+                    {% if product.operating_state == "QLD" %}
+                    <li><a href="{% url 'new_south_wales' %}">Queensland/a>
+                    </li>
+                    {% endif %}
+                    {% if product.operating_state == "WA" %}
+                    <li><a href="{% url 'new_south_wales' %}">Western Australia</a>
+                    </li>
+                    {% endif %}
+                    <li>{{ product.foodtruck_name }}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12 text-center">
+
+                <h1 class="lead">
+                	{{ product.about_us|linebreaks }}
+                </h1>
+                
+                <div class='text-center'>
+                    {% if product.availability_link %}
+                    <a href="{{ product.availability_link }}" target="_blank" class='btn btn-template-main'>CHECK AVAILABILITY</a>
+                    {% else %}
+                    <button class='btn btn-template-main' disabled>AVAILABILITIES COMING SOON!</button>
+                    {% endif %}
+                    </br>
+                    </br>
+                    </br>
+                </div>
+
+                <div class="row" id="productMain">
+                    <div class="col-sm-6" style="width:300px; height:300px;">
+<!--                         <div id="mainImage"> -->
+                        	{% if product.logo %}
+                            <img src="{{ MEDIA_URL }}{{ product.logo }}" alt="" class="img-responsive" style="margin:0 auto";>
+                            {% else %}
+                            <img src="{{ STATIC_URL }}img/placeholder.svg" alt="" class="img-responsive" style="margin:0 auto";>
+                            {% endif %}
+<!--                         </div> -->
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="box">
+
+                            <form class='form' method='POST' action='{% url "add_to_cart" product.slug %}'> {% csrf_token %}
+								
+                                    <h3>Available Catering Packages</h3>
+                                    {% if product.variation_set.all %}
+										{% if product.variation_set.packages %}
+										<select class='form-control' name='package'>
+										{% for item in product.variation_set.packages %} <!--shows the variations ie color and size -->
+											<option value='{{ item.title|lower }}' >{{ item.title|capfirst }}: ${{ item.price_per_guest|floatformat:2 }} per person</option>
+										{% endfor %}
+										</select>
+										<hr>
+										{% endif %}
+										
+										<h4>How many guests?</h4>
+                                        <p><i>Must meet minimum required</i></p>
+										<input class='form-control' name='qty' min="1" type='number' value='1' style='text-align: center;'/>
+										
+										<h4>Any additional service hours</h4>
+                                        <p><i>If you would like the food truck to be there longer</i></p>
+										<input class='form-control' name='hour' min="0" type='number' value='0' style='text-align: center;'/>
+										
+										<h4>Additional kms from the CBD</h4>
+                                        <p><i>If your venue is farther than the included travelling kilometers</i></p>
+										<input class='form-control' name='distance' min="0" type='number' value='0' style='text-align: center;' />
+                                        <hr>
+									{% endif %}
+                                </br>
+                                <input class='btn btn-template-main btn-block' type='submit' value='Add to cart' />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+
+            {% for package in product.variation_set.all %}
+            <div class="col-md-12">
+                <div class="heading text-center">
+                    <h3>{{ package.title }}</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Pricing</h5>
+                    </div>
+                    <p>${{ package.price_per_guest|floatformat:2 }} per person</p>
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Minimum</h5>
+                    </div>
+                    <p>{{ package.minimum_guests }} guests</p>
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Maximum</h5>
+                    </div>
+                    <p>{{ package.maximum_guests }} guests</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Includes</h5>
+                    </div>
+                    <p>{{ package.included_service_hours }} hours of food service</p>
+                    {% if package.included_travel_distance %}
+                    <p>Travelling of up to {{ package.included_travel_distance }} kms from CBD</p>
+                    {% endif %}
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Additional</h5>
+                    </div>
+                    {% if package.extra_hours_charge %}
+                    <p>${{ package.extra_hours_charge|floatformat:2 }} per extra hour</p>
+                    {% endif %}
+                    {% if package.extra_km_charge %}
+                    <p>${{ package.extra_km_charge|floatformat:2 }} per extra kilometer</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <div class="heading" style="margin-bottom: 0px">
+                        <h5 style="margin-bottom: 15px">Dietary</h5>
+                    </div>
+                    {% if package.gluten_free_options_upon_request %}
+                    <p>Gluten free options available upon request</p>
+                    {% else %}
+                    <p>Gluten free options NOT available</p>
+                    {% endif %}
+                    {% if package.vegetarian_options_upon_request %}
+                    <p>Vegetarian options available upon request</p>
+                    {% else %}
+                    <p>Vegetarian options NOT available</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-12">
+                    <p><strong>MENU: </strong></p>
+                    <blockquote>
+                        <p><em>{{ package.menu|linebreaks }}</em>
+                        </p>
+                    </blockquote>
+                    </br>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            {% endfor %}
+
+            
+            <div class="col-md-12">
+                <div class="box social" id="product-social">
+                    <h4>Show it to your friends</h4>
+                    <p>
+                        <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                    </p>
+                </div>
+            </div>
+            <!-- /.col-md-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->
+
+
+        
+{% endblock %}
+
+
+

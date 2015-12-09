@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_title %}
+Welcome to
+{% endblock %}
+
+{% block styles %}
+.jumbotron {
+	/*color: red;*/
+}
+{% endblock %}
+
+{% block jquery %}
+//alert("welcome!");
+{% endblock%}
+
+{# Comments here #}
+
+            <!-- *** JUMBOTRON ***
+ _________________________________________________________ -->
+
+{% block jumbotron %}
+<div class="jumbotron">
+
+    <div class="dark-mask"></div>
+    <div class="container">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row mb-small">
+            <div class="col-sm-7 text-center">
+                <h1>Seriously Delicious<br/>Food Truck Catering</h1>
+                <p class="text-uppercase text-center">Prices Upfront 
+                    <br/>Menu Choices
+                    <br/>See Availability
+                    <br/>Any Function</p>
+                <p class="text-center">Compare packages and choose that 
+                    <br/>perfect caterer for your event</p>  
+            </div>
+            <br/>
+            <br/>
+            <div class="col-sm-5">
+                <p class="text-uppercase text-center">SELECT YOUR STATE:</p>
+                <p class="text-center">
+                    <a href="{% url 'victoria' %}" class="scroll-to btn btn-template-transparent-black">VICTORIA</a>
+                </p>
+                <p class="text-center">
+                    <a href="{% url 'new_south_wales' %}" class="scroll-to btn btn-template-transparent-black">NEW SOUTH WALES</a>
+                </p>
+                <p class="text-center">
+                    <a href="{% url 'south_australia' %}" class="scroll-to btn btn-template-transparent-black">SOUTH AUSTRALIA</a>
+                </p>
+                <p class="text-center">
+                    <a href="{% url 'queensland' %}" class="scroll-to btn btn-template-transparent-black">QUEENSLAND</a>
+                </p>
+                <p class="text-center">
+                    <a href="{% url 'western_australia' %}" class="scroll-to btn btn-template-transparent-black">WESTERN AUSTRALIA</a>
+                </p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+</div>
+
+<!-- HOME PRODUCTS -->
+<!-- <div class='row'>
+
+{% for product in products %}
+  {% if product.variation_set.all %}
+		<a href="{{ product.get_absolute_url }}">
+      <div class='col-sm-4'>
+			<div class="thumbnail" style="width:334px; height:360px;">
+					{% if product.logo %}
+							<div style="width:200px; height:200px; margin:0 auto;">
+									<div class='background_img_thumb' style="height:200px; background-image: url('{{ MEDIA_URL }}{{ product.logo }}');"></div>
+							</div>
+					{% else %}
+					<img class='img-responsive' src='{% static "img/placeholder.svg" %}' />
+					{% endif %}
+
+					<div class="caption">
+					<h3>{{ product.foodtruck_name }}</h3>
+          {% if product.slogan %}
+					<p>{{ product.slogan|truncatewords:15}}</p>
+          {% else %}
+          <p>{{ product.about_us|truncatewords:15}}</p>
+          {% endif %}
+					</div>
+		  </div>
+		</div>
+  </a>
+
+{% cycle "" "" "</div><hr/><div class='row'>" %}
+  {% endif %}
+{% endfor %}
+
+</div><br/> -->
+<!-- END HOME PRODUCTS -->
+
+<!-- *** JUMBOTRON END *** -->
+
+
+<div class="container">
+    
+    
+<!--     {% block content %}
+
+    {% endblock %} -->
+    </div>
+        </section>  
+
+        <section class="bar background-gray no-mb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-uppercase text-center">WE WORK WITH AMAZING FOOD TRUCKS</h4>
+                        <br/>
+                        <ul class="owl-carousel customers">
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/customer-1.png" alt="" class="img-responsive">
+                            </li>
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/icon320x180.png" alt="" class="img-responsive">
+                            </li>
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/customer-3.png" alt="" class="img-responsive">
+                            </li>
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/customer-4.png" alt="" class="img-responsive">
+                            </li>
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/customer-5.png" alt="" class="img-responsive">
+                            </li>
+                            <li class="item">
+                                <img src="{{ STATIC_URL }}img/customer-6.png" alt="" class="img-responsive">
+                            </li>
+                        </ul>
+                        <!-- /.owl-carousel -->
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="bar background-image-fixed-2 no-mb color-white text-center">
+            <div class="dark-mask"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="icon icon-lg"><i class="fa fa-cutlery"></i>
+                        </div>
+                        <h1>Having an event? Let's make it awesome</h1>
+                        <p class="lead">Get delicious food truck catering, cooked fresh at your event. Desserts too.</p>
+                        <p class="text-center">
+                            <a href="#" class="btn btn-template-transparent-black btn-lg">MAKE IT HAPPEN</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- *** GET IT ***
+_________________________________________________________ -->
+
+        <div id="get-it">
+            <div class="container">
+                <div class="col-md-12">
+                    <h3>Food truck Owner?</br>
+                        Signup now or contact us to find out more</h3>
+                </div>
+                <div class="col-md-12">
+                    <a href="{% url 'contact' %}" class="btn btn-template-transparent-primary">DROP US A MESSAGE</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- *** GET IT END *** -->
+
+{% endblock %}
